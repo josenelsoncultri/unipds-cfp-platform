@@ -1,0 +1,82 @@
+<form (ngSubmit)="onSubmit()" class="cfp-form" novalidate>
+  <div class="form-header">
+    <h2>Submit a Proposal</h2>
+    <a routerLink="/dashboard" class="nav-button">View Dashboard →</a>
+  </div>
+  <div class="form-group">
+    <label for="name">Name <span class="required" aria-hidden="true">*</span></label>
+    <input 
+      type="text" 
+      id="name"
+      name="name"
+      [ngModel]="name()" 
+      (ngModelChange)="name.set($event)"
+      (blur)="onNameBlur()"
+      [attr.aria-required]="true"
+      [attr.aria-invalid]="!nameValid() && nameTouched()"
+      aria-describedby="name-error"
+    />
+    <div *ngIf="!nameValid() && nameTouched()" id="name-error" class="error-message" role="alert">
+      Name is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
+    <input 
+      type="email" 
+      id="email" 
+      name="email"
+      [ngModel]="email()" 
+      (ngModelChange)="email.set($event)"
+      (blur)="onEmailBlur()"
+      [attr.aria-required]="true"
+      [attr.aria-invalid]="!emailValid() && emailTouched()"
+      aria-describedby="email-error"
+    />
+    <div *ngIf="!emailValid() && emailTouched()" id="email-error" class="error-message" role="alert">
+      Please enter a valid email address.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="talkTitle">Talk Title <span class="required" aria-hidden="true">*</span></label>
+    <input 
+      type="text" 
+      id="talkTitle" 
+      name="talkTitle"
+      [ngModel]="talkTitle()" 
+      (ngModelChange)="talkTitle.set($event)"
+      (blur)="onTalkTitleBlur()"
+      [attr.aria-required]="true"
+      [attr.aria-invalid]="!talkTitleValid() && talkTitleTouched()"
+      aria-describedby="talkTitle-error"
+    />
+    <div *ngIf="!talkTitleValid() && talkTitleTouched()" id="talkTitle-error" class="error-message" role="alert">
+      Talk title is required.
+    </div>
+  </div>
+
+  <div class="form-group checkbox-group">
+    <input 
+      type="checkbox" 
+      id="isGDE" 
+      name="isGDE"
+      [ngModel]="isGDE()" 
+      (ngModelChange)="isGDE.set($event)"
+    />
+    <label for="isGDE">I am a Google Developer Expert (GDE)</label>
+  </div>
+
+  <button type="submit" [disabled]="!formValid() || isSubmitting()">
+    {{ isSubmitting() ? 'Submitting...' : 'Submit Proposal' }}
+  </button>
+
+  <div *ngIf="submitSuccess()" class="success-message" role="alert">
+    Proposal submitted successfully!
+  </div>
+
+  <div *ngIf="submitError()" class="error-message api-error" role="alert">
+    {{ submitError() }}
+  </div>
+</form>
