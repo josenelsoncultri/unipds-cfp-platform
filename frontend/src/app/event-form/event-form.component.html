@@ -72,7 +72,7 @@
     }
   </div>
 
-  <button type="submit" [disabled]="eventForm.invalid || isSubmitting()">
+  <button type="submit" class="submit-btn" [disabled]="eventForm.invalid || isSubmitting()">
     {{ isSubmitting() ? 'Salvando...' : 'Salvar Evento' }}
   </button>
 

@@ -19,7 +19,7 @@ describe('Cadastro de Evento - E2E Tests', () => {
     cy.get('#capacidade').type('500');
     cy.get('#data').type('2026-10-15');
 
-    cy.get('button[type="submit"]').click();
+    cy.get('button.submit-btn').click();
 
     cy.wait('@saveEvent');
     cy.get('.success-message')
