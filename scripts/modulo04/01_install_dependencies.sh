@@ -1,0 +1,1 @@
+nx add @nx/cypress
