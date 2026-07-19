@@ -16,9 +16,11 @@
       [attr.aria-invalid]="!nameValid() && nameTouched()"
       aria-describedby="name-error"
     />
-    <div *ngIf="!nameValid() && nameTouched()" id="name-error" class="error-message" role="alert">
-      Name is required.
-    </div>
+    @if (!nameValid() && nameTouched()) {
+      <div id="name-error" class="error-message" role="alert">
+        Name is required.
+      </div>
+    }
   </div>
 
   <div class="form-group">
@@ -34,9 +36,11 @@
       [attr.aria-invalid]="!emailValid() && emailTouched()"
       aria-describedby="email-error"
     />
-    <div *ngIf="!emailValid() && emailTouched()" id="email-error" class="error-message" role="alert">
-      Please enter a valid email address.
-    </div>
+    @if (!emailValid() && emailTouched()) {
+      <div id="email-error" class="error-message" role="alert">
+        Please enter a valid email address.
+      </div>
+    }
   </div>
 
   <div class="form-group">
@@ -52,9 +56,11 @@
       [attr.aria-invalid]="!talkTitleValid() && talkTitleTouched()"
       aria-describedby="talkTitle-error"
     />
-    <div *ngIf="!talkTitleValid() && talkTitleTouched()" id="talkTitle-error" class="error-message" role="alert">
-      Talk title is required.
-    </div>
+    @if (!talkTitleValid() && talkTitleTouched()) {
+      <div id="talkTitle-error" class="error-message" role="alert">
+        Talk title is required.
+      </div>
+    }
   </div>
 
   <div class="form-group checkbox-group">
@@ -72,11 +78,15 @@
     {{ isSubmitting() ? 'Submitting...' : 'Submit Proposal' }}
   </button>
 
-  <div *ngIf="submitSuccess()" class="success-message" role="alert">
-    Proposal submitted successfully!
-  </div>
+  @if (submitSuccess()) {
+    <div class="success-message" role="alert">
+      Proposal submitted successfully!
+    </div>
+  }
 
-  <div *ngIf="submitError()" class="error-message api-error" role="alert">
-    {{ submitError() }}
-  </div>
+  @if (submitError()) {
+    <div class="error-message api-error" role="alert">
+      {{ submitError() }}
+    </div>
+  }
 </form>

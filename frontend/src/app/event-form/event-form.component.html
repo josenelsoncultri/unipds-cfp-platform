@@ -1,0 +1,90 @@
+<form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="cfp-form" novalidate>
+  <div class="form-header">
+    <h2>Cadastro de Evento</h2>
+  </div>
+
+  <div class="form-group">
+    <label for="nome">Nome <span class="required" aria-hidden="true">*</span></label>
+    <input
+      type="text"
+      id="nome"
+      formControlName="nome"
+      [attr.aria-required]="true"
+      [attr.aria-invalid]="isInvalid('nome')"
+      aria-describedby="nome-error"
+    />
+    @if (isInvalid('nome')) {
+      <div id="nome-error" class="error-message" role="alert">
+        Nome é obrigatório.
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="endereco">Endereço <span class="required" aria-hidden="true">*</span></label>
+    <input
+      type="text"
+      id="endereco"
+      formControlName="endereco"
+      [attr.aria-required]="true"
+      [attr.aria-invalid]="isInvalid('endereco')"
+      aria-describedby="endereco-error"
+    />
+    @if (isInvalid('endereco')) {
+      <div id="endereco-error" class="error-message" role="alert">
+        Endereço é obrigatório.
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="capacidade">Capacidade <span class="required" aria-hidden="true">*</span></label>
+    <input
+      type="number"
+      id="capacidade"
+      formControlName="capacidade"
+      [attr.aria-required]="true"
+      [attr.aria-invalid]="isInvalid('capacidade')"
+      aria-describedby="capacidade-error"
+      min="1"
+    />
+    @if (isInvalid('capacidade')) {
+      <div id="capacidade-error" class="error-message" role="alert">
+        Capacidade é obrigatória e deve ser maior que zero.
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="data">Data <span class="required" aria-hidden="true">*</span></label>
+    <input
+      type="date"
+      id="data"
+      formControlName="data"
+      [attr.aria-required]="true"
+      [attr.aria-invalid]="isInvalid('data')"
+      aria-describedby="data-error"
+    />
+    @if (isInvalid('data')) {
+      <div id="data-error" class="error-message" role="alert">
+        Data é obrigatória.
+      </div>
+    }
+  </div>
+
+  <button type="submit" [disabled]="eventForm.invalid || isSubmitting()">
+    {{ isSubmitting() ? 'Salvando...' : 'Salvar Evento' }}
+  </button>
+
+  @if (submitSuccess()) {
+    <div class="success-message" role="alert">
+      Evento salvo com sucesso!
+    </div>
+  }
+
+  @if (submitError()) {
+    <div class="error-message api-error" role="alert">
+      {{ submitError() }}
+    </div>
+  }
+</form>
