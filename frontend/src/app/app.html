@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<nav class="main-nav">
+  <ul>
+    <li><a routerLink="/event/new" routerLinkActive="active">Cadastro de Evento</a></li>
+    <li><a routerLink="/talks/new" routerLinkActive="active">Cadastro de Palestra</a></li>
+    <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+  </ul>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

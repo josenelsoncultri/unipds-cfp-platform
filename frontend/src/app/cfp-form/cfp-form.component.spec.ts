@@ -4,6 +4,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { provideRouter } from '@angular/router';
 
 describe('CfpFormComponent', () => {
   let component: CfpFormComponent;
@@ -22,7 +23,8 @@ describe('CfpFormComponent', () => {
       imports: [CfpFormComponent, FormsModule],
       providers: [
         provideHttpClient(),
-        provideHttpClientTesting()
+        provideHttpClientTesting(),
+        provideRouter([])
       ]
     }).compileComponents();
 

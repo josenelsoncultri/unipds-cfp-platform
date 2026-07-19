@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCfpDto } from './create-cfp.dto';
+import { CreateEventDto } from './create-event.dto';
 
 @Injectable()
 export class AppService {
   private readonly cfpSubmissions: CreateCfpDto[] = [];
+  private readonly eventLocations: CreateEventDto[] = [];
 
   getData(): { message: string } {
     return { message: 'Hello API' };
@@ -17,5 +19,13 @@ export class AppService {
   getCfpSubmissions(): CreateCfpDto[] {
     return this.cfpSubmissions;
   }
-}
 
+  submitEvent(dto: CreateEventDto): CreateEventDto {
+    this.eventLocations.push(dto);
+    return dto;
+  }
+
+  getEvents(): CreateEventDto[] {
+    return this.eventLocations;
+  }
+}

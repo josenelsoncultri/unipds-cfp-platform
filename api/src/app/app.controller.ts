@@ -1,7 +1,8 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CreateCfpDto } from './create-cfp.dto';
-import { SpeakerDTO } from '@cfp-platform/shared-types';
+import { CreateEventDto } from './create-event.dto';
+import { SpeakerDTO, EventDTO } from '@cfp-platform/shared-types';
 
 @Controller()
 export class AppController {
@@ -21,5 +22,14 @@ export class AppController {
   getCfp(): SpeakerDTO[] {
     return this.appService.getCfpSubmissions();
   }
-}
 
+  @Post('event')
+  submitEvent(@Body() dto: CreateEventDto) {
+    return this.appService.submitEvent(dto);
+  }
+
+  @Get('event')
+  getEvents(): EventDTO[] {
+    return this.appService.getEvents();
+  }
+}

@@ -4,40 +4,52 @@
     <a routerLink="/" class="nav-button">← Back to Form</a>
   </div>
 
-  <div *ngIf="isLoading()" class="loading-state">
-    Loading proposals...
-  </div>
-
-  <div *ngIf="error()" class="error-message api-error" role="alert">
-    {{ error() }}
-  </div>
-
-  <div *ngIf="!isLoading() && !error()">
-    <div *ngIf="submissions().length === 0" class="empty-state">
-      <p>No proposals submitted yet.</p>
+  @if (isLoading()) {
+    <div class="loading-state">
+      Loading proposals...
     </div>
+  }
 
-    <table *ngIf="submissions().length > 0" class="proposals-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Talk Title</th>
-          <th>GDE Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of submissions()">
-          <td>{{ item.name }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.talkTitle }}</td>
-          <td>
-            <span [class]="item.isGDE ? 'badge badge-gde' : 'badge badge-standard'">
-              {{ item.isGDE ? 'GDE' : 'Standard' }}
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  @if (error()) {
+    <div class="error-message api-error" role="alert">
+      {{ error() }}
+    </div>
+  }
+
+  @if (!isLoading() && !error()) {
+    <div>
+      @if (submissions().length === 0) {
+        <div class="empty-state">
+          <p>No proposals submitted yet.</p>
+        </div>
+      }
+
+      @if (submissions().length > 0) {
+        <table class="proposals-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Talk Title</th>
+              <th>GDE Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of submissions(); track item.id) {
+              <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.talkTitle }}</td>
+                <td>
+                  <span [class]="item.isGDE ? 'badge badge-gde' : 'badge badge-standard'">
+                    {{ item.isGDE ? 'GDE' : 'Standard' }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    </div>
+  }
 </div>
